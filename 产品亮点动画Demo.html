@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>纯动画 Demo</title>
+<style>
+:root{font-family:system-ui,"Segoe UI","Microsoft YaHei",sans-serif;color:#1d1d1f;background:#f5f5f7;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible{outline:3px solid #0071e3;outline-offset:5px}.topbar{height:76px;max-width:1280px;margin:auto;padding:0 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #dedee3}.brand{font-size:23px;font-weight:650;letter-spacing:-1px}.brand span{font-size:10px;letter-spacing:1.8px;font-weight:500;color:#86868b;margin-left:13px}.nav{font-size:12px;color:#6e6e73;display:flex;gap:24px;align-items:center}.pill{border:0;border-radius:30px;background:#0071e3;color:white;padding:10px 17px}.intro{max-width:1184px;margin:66px auto 32px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 12px}.eyebrow{font-size:11px;letter-spacing:2.4px;color:#86868b;margin:0 0 15px}h1{font-size:clamp(32px,4vw,54px);letter-spacing:-2px;line-height:1.12;margin:0;font-weight:650}.intro-note{color:#86868b;font-size:13px;margin:0 0 5px}.viewport{user-select:none;overflow:hidden;width:100%;touch-action:pan-y;cursor:grab}.viewport:active{cursor:grabbing}.track{display:flex;gap:24px;will-change:transform;transition:transform 820ms cubic-bezier(.22,.8,.22,1);padding:12px 0 22px}.card{position:relative;flex:none;width:min(720px,76vw);height:510px;background:#fff;border-radius:30px;overflow:hidden;text-align:center;opacity:.5;transform:scale(.96);transition:opacity 650ms,transform 820ms cubic-bezier(.22,.8,.22,1)}.card.active{opacity:1;transform:scale(1)}.caption{position:relative;z-index:2;margin:37px 20px 0;font-size:23px;font-weight:600;line-height:1.3;letter-spacing:-.6px}.art{position:absolute;inset:110px 0 0;display:flex;align-items:center;justify-content:center;overflow:hidden}.glint{position:absolute;width:60%;height:90%;top:0;left:-80%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.52),transparent);transform:skewX(-18deg);pointer-events:none;opacity:0}.active .glint{animation:shine 2.6s ease .35s both}@keyframes shine{15%{opacity:1}90%{opacity:1}100%{left:130%;opacity:0}}.controls{display:flex;align-items:center;justify-content:center;gap:14px;margin:10px 0 21px}.pagination{height:48px;display:flex;align-items:center;gap:4px;background:#e8e8ed;border-radius:40px;padding:0 16px}.dot{height:40px;width:24px;padding:0;border:0;background:transparent;position:relative;display:grid;place-items:center;transition:width .4s}.dot::before{content:"";width:7px;height:7px;border-radius:9px;background:#929297;transition:width .45s,background .45s}.dot[aria-current="true"]{width:39px}.dot[aria-current="true"]::before{width:29px;background:#303033}.play,.arrow{border:0;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#e8e8ed;color:#1d1d1f}.play:hover,.arrow:hover{background:#dedee5}.play svg{width:16px;height:16px}.arrow{font-size:24px}.hint{text-align:center;font-size:11px;color:#86868b;letter-spacing:.3px;margin:0 0 32px}.foot{max-width:1184px;margin:0 auto;padding:20px 12px 26px;border-top:1px solid #dedee3;display:flex;justify-content:space-between;color:#86868b;font-size:10px;line-height:1.7}.count{font-variant-numeric:tabular-nums}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+@media(min-width:1500px){.intro{margin-top:86px}.card{height:570px}.art{inset:125px 0 0}}
+@media(max-width:600px){.topbar{height:64px;margin:0 20px;padding:0}.brand{font-size:20px}.brand span{font-size:8px;margin-left:8px}.nav>span{display:none}.pill{font-size:11px;padding:8px 12px}.intro{margin:36px 0 22px;padding:0 25px}.eyebrow{font-size:9px;margin-bottom:10px}h1{font-size:33px;letter-spacing:-1.3px}.intro-note{display:none}.track{gap:14px;padding-top:0}.card{width:86vw;height:480px;border-radius:26px}.caption{font-size:17px;margin-top:30px;letter-spacing:-.4px}.art{inset:112px 0 0}.controls{margin-top:3px;gap:10px}.pagination{height:44px}.play,.arrow{height:44px;width:44px}.arrow{display:none}.foot{margin:0 24px;gap:20px}.hint{margin-bottom:25px}}
+
+.visual{width:300px;height:300px;display:grid;place-items:center;position:relative;transform:translateY(18px) scale(.88);transition:transform 1.25s cubic-bezier(.2,.7,.2,1)}
+.active .visual{transform:translateY(0) scale(1)}
+.orb{width:220px;height:220px;border-radius:50%;background:radial-gradient(circle at 30% 23%,#fff 0%,#b9e9fd 18%,#a6a0f1 48%,#5a56a9 73%,#36305f 100%);box-shadow:0 32px 45px -24px #9184bb}
+.layers{width:220px;height:220px;position:relative;transform:rotate(-18deg) skew(10deg)}
+.layers i{position:absolute;inset:0;border-radius:34px;background:linear-gradient(135deg,#f3e6ff,#a59ce7);box-shadow:0 16px 30px #64578225}.layers i:nth-child(1){transform:translate(-22px,30px);background:#dfd8f0}.layers i:nth-child(2){transform:translate(0,0);background:#bab0e1}.layers i:nth-child(3){transform:translate(22px,-30px)}
+.prism{width:220px;height:240px;clip-path:polygon(50% 0,100% 26%,90% 80%,45% 100%,0 67%,8% 22%);background:conic-gradient(from 15deg at 48% 47%,#c4edff,#70a9d7,#eadcf9,#94bccd,#fff,#c4edff)}
+.rings{width:250px;height:250px;position:relative;transform:rotate(-25deg)}.rings i{position:absolute;inset:0;border:24px solid #b4d4d3;border-radius:50%;box-shadow:inset 4px 5px 10px #557c8630,3px 5px 12px #557c8620}.rings i:nth-child(2){inset:38px;border-width:20px;border-color:#91b9c4}.rings i:nth-child(3){inset:76px;border-width:18px;border-color:#668caa}
+.tile{width:218px;height:218px;border-radius:48px;transform:rotate(-12deg);background:linear-gradient(130deg,#f7e2cd,#dfb9a6 28%,#fff4df 49%,#b4a7be 75%,#d7cada);box-shadow:inset 2px 2px 3px #ffffffc0,0 25px 40px -20px #9d849e}
+@media(max-width:600px){.visual{width:270px;height:270px}}
+
+@media(prefers-reduced-motion:reduce){*,*::before{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="topbar"><div class="brand">Motion<span>DEMO</span></div><nav class="nav" aria-label="页面导航"><span></span><button class="pill" id="explore">查看动画</button></nav></header>
+<main>
+<section class="intro"><div><p class="eyebrow">MOTION STUDY</p><h1>让画面流动。</h1></div><p class="intro-note">滑动 · 缩放 · 高光</p></section>
+<section class="viewport" tabindex="0" aria-roledescription="轮播" aria-label="动画卡片，使用左右方向键切换">
+<div class="track">
+<article class="card active" data-index="0" aria-label="1 / 5 流动"><h2 class="caption">流动</h2><div class="art"><div class="visual" aria-hidden="true"><div class="orb"></div></div><span class="glint"></span></div></article>
+<article class="card" data-index="1" aria-label="2 / 5 层叠"><h2 class="caption">层叠</h2><div class="art"><div class="visual" aria-hidden="true"><div class="layers"><i></i><i></i><i></i></div></div><span class="glint"></span></div></article>
+<article class="card" data-index="2" aria-label="3 / 5 折光"><h2 class="caption">折光</h2><div class="art"><div class="visual" aria-hidden="true"><div class="prism"></div></div><span class="glint"></span></div></article>
+<article class="card" data-index="3" aria-label="4 / 5 环绕"><h2 class="caption">环绕</h2><div class="art"><div class="visual" aria-hidden="true"><div class="rings"><i></i><i></i><i></i></div></div><span class="glint"></span></div></article>
+<article class="card" data-index="4" aria-label="5 / 5 光泽"><h2 class="caption">光泽</h2><div class="art"><div class="visual" aria-hidden="true"><div class="tile"></div></div><span class="glint"></span></div></article>
+</div>
+</section>
+<div class="controls"><button class="arrow" id="previous" aria-label="上一个画面">‹</button><div class="pagination" aria-label="选择画面"></div><button class="play" aria-label="自动播放" aria-pressed="false"></button><button class="arrow" id="next" aria-label="下一个画面">›</button></div>
+<p class="hint"><span class="count">01 / 05</span> &nbsp; · &nbsp; 左右滑动，切换动画</p>
+<p class="sr-only" id="announcement" aria-live="polite"></p>
+</main>
+<footer class="foot"><span>纯动画交互演示</span><span>拖动或点击圆点切换</span></footer>
+<script>
+const viewport=document.querySelector('.viewport'),track=document.querySelector('.track'),cards=[...document.querySelectorAll('.card')],pagination=document.querySelector('.pagination'),play=document.querySelector('.play');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let current=0,playing=false,timer=null,startX=null,startY=null;
+const icons={play:'<svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M5 2.8c0-.7.7-1 1.3-.6l11 7.1c.5.3.5 1.1 0 1.4l-11 7.1c-.6.4-1.3.1-1.3-.6z"/></svg>',pause:'<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="3" width="4" height="14" rx="1" fill="currentColor"/><rect x="12" y="3" width="4" height="14" rx="1" fill="currentColor"/></svg>'};
+cards.forEach((card,i)=>{const button=document.createElement('button');button.className='dot';button.setAttribute('aria-label','查看'+card.getAttribute('aria-label'));button.addEventListener('click',()=>go(i,true));pagination.append(button)});
+const dots=[...pagination.children];
+function position(){const card=cards[current];track.style.transform=`translateX(${(viewport.clientWidth-card.offsetWidth)/2-card.offsetLeft}px)`}
+function schedule(){clearTimeout(timer);if(playing&&!document.hidden)timer=setTimeout(()=>{go(current+1);schedule()},3200)}
+function go(index,manual=false){current=(index+cards.length)%cards.length;cards.forEach((card,i)=>{card.classList.toggle('active',i===current);card.setAttribute('aria-hidden',String(i!==current));dots[i].setAttribute('aria-current',String(i===current))});document.querySelector('.count').textContent=`0${current+1} / 05`;if(manual)document.querySelector('#announcement').textContent=cards[current].getAttribute('aria-label');position();if(manual)schedule()}
+function setPlaying(value){playing=value;play.innerHTML=playing?icons.pause:icons.play;play.setAttribute('aria-label',playing?'暂停自动播放':'自动播放');play.setAttribute('aria-pressed',String(playing));schedule()}
+play.addEventListener('click',()=>setPlaying(!playing));
+document.querySelector('#previous').addEventListener('click',()=>go(current-1,true));
+document.querySelector('#next').addEventListener('click',()=>go(current+1,true));
+document.querySelector('#explore').addEventListener('click',()=>{go(0,true);viewport.focus({preventScroll:true});viewport.scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'center'})});
+viewport.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();go(current+(e.key==='ArrowRight'?1:-1),true)}});
+viewport.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;startX=e.clientX;startY=e.clientY;viewport.setPointerCapture(e.pointerId)});
+viewport.addEventListener('pointerup',e=>{if(startX===null)return;const dx=e.clientX-startX,dy=e.clientY-startY;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))go(current+(dx<0?1:-1),true);startX=null;startY=null});
+viewport.addEventListener('pointercancel',()=>{startX=null;startY=null});
+window.addEventListener('resize',position);document.addEventListener('visibilitychange',schedule);
+go(0);setPlaying(false);
+</script>
+</body>
+</html>
